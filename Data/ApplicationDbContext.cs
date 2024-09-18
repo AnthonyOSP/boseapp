@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace boseapp.Data;
@@ -9,4 +10,7 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
+
+    public DbSet<boseapp.Models.Cliente> DataCliente { get; set; }
+    public DbSet<boseapp.Models.Contacto> DataContacto { get; set; }
 }
