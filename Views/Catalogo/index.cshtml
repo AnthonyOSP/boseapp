@@ -18,7 +18,7 @@
                                 <img src="@item.ImagenURL" class="card-img-top" alt="@item.Nombre">
                                 <div class="card-body">
                                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                                    <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                                    <p class="card-text text-break">@Html.DisplayFor(modelItem => item.Descripcion)</p>
                                     <a href="#" class="btn btn-primary">$@Html.DisplayFor(modelItem => item.Precio)</a>
                                 </div>
                             </div>
