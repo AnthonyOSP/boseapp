@@ -51,4 +51,4 @@ En el archivo Program.cs, cambiar el connectionString por la DB de postgreSQL ig
 
 ### INICIAR TU PROYECTO
 
-dotnet run watch
+dotnet watch run

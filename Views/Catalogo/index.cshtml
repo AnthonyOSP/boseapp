@@ -1,0 +1,31 @@
+@model IEnumerable<boseapp.Models.Producto>
+@{
+    ViewData["Title"] = "Catalogo";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <h1>@ViewData["Message"]</h1>
+    <div class="row">
+        <div class="col">
+            <div id="products" class="mb-3">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <img src="@item.ImagenURL" class="card-img-top" alt="@item.Nombre">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                                    <a href="#" class="btn btn-primary">$@Html.DisplayFor(modelItem => item.Precio)</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
