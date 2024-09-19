@@ -13,4 +13,6 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<boseapp.Models.Cliente> DataCliente { get; set; }
     public DbSet<boseapp.Models.Contacto> DataContacto { get; set; }
+    public DbSet<boseapp.Models.Producto> DataProducto { get; set; }
+    public DbSet<boseapp.Models.Categoria> DataCategoria { get; set; }
 }

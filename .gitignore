@@ -3,3 +3,5 @@ obj/
 
 Data/Migrations/
 Data/Migrations/ApplicationDbContextModelSnapshot.cs
+
+.fake
