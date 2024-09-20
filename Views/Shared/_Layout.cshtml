@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - boseapp</title>
+    <title>Bose Store - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/boseapp.styles.css" asp-append-version="true" />
@@ -12,33 +12,49 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3"
+            style="background:#191919">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bose Store</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/bose_logo_white.png?alt=media&token=1bdfe212-6d26-4c88-a630-891031400905"
+                        alt="Bootstrap" width="100" height="100" class="img-navbar">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contacto"
-                                asp-action="Index">Contacto</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Catalogo"
-                                asp-action="Index">Catalogo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
-                        </li>
+                <div class="offcanvas offcanvas-end text-bg-dark" style="background:#191919" tabindex="-1"
+                    id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-light" id="offcanvasDarkNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 fs-5">
+                            <li class="nav-item">
+                                <a class="nav-link text-light " aria-current="page" asp-area="" asp-controller="Home"
+                                    asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Contacto"
+                                    asp-action="Index">Contacto</a>
+                            </li>
 
-                    </ul>
-                    <partial name="_LoginPartial" />
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Catalogo"
+                                    asp-action="Index">Catalogo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home"
+                                    asp-action="Privacy"></a>
+                            </li>
+
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+
                 </div>
             </div>
         </nav>
