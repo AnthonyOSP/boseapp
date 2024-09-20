@@ -10,16 +10,16 @@
         <div class="col-md-6">
             <form id="contactForm" asp-controller="Contacto" asp-action="Enviar" method="post">
                 <div class="form-group mb-3">
-                    <label asp-for="FormContacto.Nombre" class="control-label">Nombre</label>
-                    <input asp-for="FormContacto.Nombre" class="form-control" required />
+                    <label asp-for="FormContacto!.Nombre" class="control-label">Nombre</label>
+                    <input asp-for="FormContacto!.Nombre" class="form-control" required />
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="FormContacto.Email">Correo Electrónico</label>
-                    <input asp-for="FormContacto.Email" type="email" class="form-control" required />
+                    <label asp-for="FormContacto!.Email">Correo Electrónico</label>
+                    <input asp-for="FormContacto!.Email" type="email" class="form-control" required />
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="FormContacto.Message">Mensaje</label>
-                    <textarea asp-for="FormContacto.Message" class="form-control" required></textarea>
+                    <label asp-for="FormContacto!.Message">Mensaje</label>
+                    <textarea asp-for="FormContacto!.Message" class="form-control" required></textarea>
                 </div>
                 <div class="form-group text-center mb-3">
                     <button type="submit" class="btn btn-primary">Enviar</button>
