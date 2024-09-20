@@ -1,7 +1,49 @@
-@model IEnumerable<boseapp.Models.Producto>
+@model dynamic;
+@using System.Collections.Generic;
+
 @{
     ViewData["Title"] = "Catalogo";
+    IEnumerable<boseapp.Models.Categoria> categorias = new List<Categoria>();
+    IEnumerable<boseapp.Models.Producto> catalogos = new List<Producto>();
+    categorias = @Model.itemsCategoria;
+    catalogos = @Model.itemsCatalogos;
 }
+
+<style>
+    .card-fixed {
+        height: 10rem;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 2rem;
+    }
+
+    .card-title {
+        height: 3rem;
+    }
+
+    .card-text::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2rem;
+        background: linear-gradient(to top, white, transparent);
+    }
+
+    .card-text.expanded::after {
+        opacity: 0;
+    }
+
+    .see-more {
+        position: absolute;
+        bottom: 4rem;
+        left: 1rem;
+        background: none;
+        cursor: pointer;
+        color: blue;
+    }
+</style>
 
 <h1>@ViewData["Title"]</h1>
 
@@ -11,14 +53,16 @@
         <div class="col">
             <div id="products" class="mb-3">
                 <div class="row">
-                    @foreach (var item in Model)
+                    @foreach (Producto item in Model.itemsCatalogos)
                     {
                         <div class="col-sm-4">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card mb-4" style="width: 18rem;">
                                 <img src="@item.ImagenURL" class="card-img-top" alt="@item.Nombre">
-                                <div class="card-body">
+                                <div class="card-body ">
                                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                                    <p class="card-text text-break">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                                    <p class="card-text card-fixed">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                                    <span class="see-more" onclick="toggleText(this)" style="display: none;">ver
+                                        más</span>
                                     <a href="#" class="btn btn-primary">$@Html.DisplayFor(modelItem => item.Precio)</a>
                                 </div>
                             </div>
@@ -29,3 +73,28 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll('.card-text');
+        cards.forEach(card => {
+            if (card.scrollHeight > card.clientHeight) {
+                const seeMore = card.nextElementSibling;
+                seeMore.style.display = 'inline';
+            }
+        });
+    });
+
+    function toggleText(element) {
+        const cardText = element.previousElementSibling;
+        if (cardText.style.height === 'auto') {
+            cardText.style.height = '10rem';
+            element.innerText = 'ver más';
+            cardText.classList.remove('expanded');
+        } else {
+            cardText.style.height = 'auto';
+            element.innerText = 'ver menos';
+            cardText.classList.add('expanded');
+        }
+    }
+</script>

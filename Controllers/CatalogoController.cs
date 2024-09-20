@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using boseapp.Data;
 using boseapp.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Dynamic;
 
 namespace boseapp.Controllers
 {
@@ -24,7 +26,11 @@ namespace boseapp.Controllers
         public IActionResult Index()
         {
             var catalogos = from o in _context.DataProducto select o;
-            return View(catalogos);
+            var categoria = from o in _context.DataCategoria select o;
+            dynamic model = new ExpandoObject();
+            model.itemsCategoria = categoria;
+            model.itemsCatalogos = catalogos;
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
