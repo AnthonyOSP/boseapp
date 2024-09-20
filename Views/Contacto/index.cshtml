@@ -1,4 +1,4 @@
-@model boseapp.Models.Contacto
+@model boseapp.ViewModel.ContactoViewModel
 
 @{
     ViewData["Title"] = "Contacto";
@@ -10,27 +10,52 @@
         <div class="col-md-6">
             <form id="contactForm" asp-controller="Contacto" asp-action="Enviar" method="post">
                 <div class="form-group mb-3">
-                    <label asp-for="Nombre" class="control-label">Nombre</label>
-                    <input asp-for="Nombre" class="form-control" required />
+                    <label asp-for="FormContacto.Nombre" class="control-label">Nombre</label>
+                    <input asp-for="FormContacto.Nombre" class="form-control" required />
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="Email">Correo Electrónico</label>
-                    <input asp-for="Email" type="email" class="form-control" required />
+                    <label asp-for="FormContacto.Email">Correo Electrónico</label>
+                    <input asp-for="FormContacto.Email" type="email" class="form-control" required />
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="Message">Mensaje</label>
-                    <textarea asp-for="Message" class="form-control" required></textarea>
+                    <label asp-for="FormContacto.Message">Mensaje</label>
+                    <textarea asp-for="FormContacto.Message" class="form-control" required></textarea>
                 </div>
                 <div class="form-group text-center mb-3">
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
-
-                @if (ViewData["Message"] != null)
-                {
-                    <div class="alert alert-success" role="alert">
-                        @ViewData["Message"]
-                    </div>
-                }
             </form>
+            @if (ViewData["Message"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewData["Message"]
+                </div>
+            }
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="tabla-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <td>Email</td>
+                        <td>Message</td>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListContacto != null)
+                        {
+                            foreach (var item in Model.ListContacto)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

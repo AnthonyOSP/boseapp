@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using boseapp.Data;
 using boseapp.Models;
+using boseapp.ViewModel;
 
 namespace boseapp.Controllers
 {
@@ -23,19 +24,41 @@ namespace boseapp.Controllers
 
         public IActionResult Index()
         {
-            return View(new Contacto());
+            var miscontactos = from o in _context.DataContacto select o;
+            _logger.LogDebug("contactos {miscontactos}", miscontactos);
+            var viewModel = new ContactoViewModel
+            {
+                FormContacto = new Contacto(),
+                ListContacto = miscontactos
+            };
+            _logger.LogDebug("viewModel {viewModel}", viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Enviar(Contacto objcontacto)
+        public IActionResult Enviar(ContactoViewModel viewModel)
         {
             _logger.LogDebug("Ingreso a enviar mensaje");
-            _context.Add(objcontacto);
+
+            if (viewModel.FormContacto == null)
+            {
+                _logger.LogError("FormContacto is null");
+                return BadRequest("FormContacto cannot be null");
+            }
+
+            var contacto = new Contacto
+            {
+                Nombre = viewModel.FormContacto.Nombre,
+                Email = viewModel.FormContacto.Email,
+                Message = viewModel.FormContacto.Message
+            };
+
+            _context.Add(contacto);
             _context.SaveChanges();
 
             ViewData["Message"] = "Se registro el contacto correctamente";
 
-            return View("Index", new Contacto());
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
