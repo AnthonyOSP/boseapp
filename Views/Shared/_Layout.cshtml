@@ -8,11 +8,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/boseapp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/_Layout.cshtml.css" />
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3"
+        <div class="top-container">
+            <p class=" top-text">Bienvenido a mi proyecto de PROGRAMACIÓN</p>
+            <div class="top-closeArea">
+                <a class="delete-sign"><img width="24" height="24"
+                        src="https://img.icons8.com/material-rounded/24/delete-sign.png" alt="delete-sign" /></a>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow"
             style="background:#191919">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
@@ -60,7 +68,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
@@ -75,5 +83,30 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButton = document.querySelector('.delete-sign');
+        const topContainer = document.querySelector('.top-container');
+
+        // Check localStorage to see if the container should be hidden
+        if (localStorage.getItem('topContainerHidden') === 'true') {
+            topContainer.style.display = 'none';
+        }
+
+        deleteButton.addEventListener('click', function () {
+            topContainer.classList.add('slide-up');
+            topContainer.addEventListener('animationend', function () {
+                topContainer.style.display = 'none';
+                localStorage.setItem('topContainerHidden', 'true');
+            });
+        });
+        window.addEventListener('beforeunload', function (event) {
+            if (event.persisted || (performance.navigation && performance.navigation.type === 1)) {
+                localStorage.removeItem('topContainerHidden');
+            }
+        });
+    });
+</script>
 
 </html>

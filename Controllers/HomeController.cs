@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using boseapp.Models;
 
+
 namespace boseapp.Controllers;
 
 public class HomeController : Controller

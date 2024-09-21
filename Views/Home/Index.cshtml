@@ -1,8 +1,131 @@
 ﻿@{
+    Layout = "_Layout";
     ViewData["Title"] = "Home";
 }
 
+
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/CARRUSEL%2FCarrusel_1.webp?alt=media&token=c28668b7-2934-48b8-9fc6-8e2568d32f66"
+                    class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="right: -40%; left: 0; bottom: 30%; padding: 0;">
+                    <h5>Tú controlas el ambiente</h5>
+                    <p>No es una fiesta hasta que no presiones play</p>
+                    <button type="button" class="btn btn-dark"
+                        style="border-radius: 20px; padding:10px 30px">Comprar</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/CARRUSEL%2FCarrusel_2.webp?alt=media&token=6232ce8c-df60-4d62-a7ac-54b5fd10c2dd"
+                    class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="right: -40%; left: 0; bottom: 30%; padding: 0;">
+                    <h5>El sonido ahora es personal</h5>
+                    <p>NUEVOS | QUIETCOMFORT® EARBUDS II</p>
+                    <button type="button" class="btn btn-dark"
+                        style="border-radius: 20px; padding:10px 30px">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <section class="body-section">
+        <p class="body-tittle">PRODUCTOS DESTACADOS</p>
+        <div class="card-container">
+            <div class="card-colum">
+                <div class="card h-100" style="width: 15rem;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/Productos%20Destacados%2FProductos-destacados-1.webp?alt=media&token=8778bf3e-e605-44df-a394-fcf7ff93ca09"
+                        class="card-img-top" alt="producto-destacado1">
+                    <div class="card-body">
+                        <h5 class="card-title">Auriculares Bose QuietComfort Ultra</h5>
+                        <p class="card-text">descripcion</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-colum">
+                <div class="card h-100" style="width: 15rem;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/Productos%20Destacados%2FProductos-destacados-2.webp?alt=media&token=7030c766-fa9b-4e80-b5df-4f8de2dfd2a3"
+                        class="card-img-top" alt="producto-destacado1">
+                    <div class="card-body">
+                        <h5 class="card-title">Altavoz portátil Bose SoundLink Max</h5>
+                        <p class="card-text">descripcion</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-colum">
+                <div class="card h-100" style="width: 15rem;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/Productos%20Destacados%2FProductos-destacados-3.webp?alt=media&token=ad6eeb83-8acc-49dc-8882-5ea0cea9ebed"
+                        class="card-img-top" alt="producto-destacado1">
+                    <div class="card-body">
+                        <h5 class="card-title">Audífonos Bose QuietComfort Ultra</h5>
+                        <p class="card-text">descripcion</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-colum">
+                <div class="card h-100" style="width: 15rem;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/Productos%20Destacados%2FProductos-destacados-4.webp?alt=media&token=8bf3a36f-efc4-4966-af14-64602f367e62"
+                        class="card-img-top" alt="producto-destacado1">
+                    <div class="card-body">
+                        <h5 class="card-title">Audífonos Bose QuietComfort</h5>
+                        <p class="card-text">descripcion</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
+
+<style>
+    .body-tittle {
+        font-size: x-large;
+        display: flex;
+        width: 100%;
+        padding-left: 3.5rem;
+    }
+
+    .body-section {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .card-colum {
+        display: flex;
+        justify-content: center;
+        margin: 10px 20px;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    @@media(min-width: 575px) {
+
+        .body-tittle {
+            font-size: large;
+        }
+    }
+</style>
