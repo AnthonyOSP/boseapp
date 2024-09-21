@@ -1,5 +1,4 @@
 ﻿@{
-    Layout = "_Layout";
     ViewData["Title"] = "Home";
 }
 
@@ -11,21 +10,21 @@
             <div class="carousel-item active">
                 <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/CARRUSEL%2FCarrusel_1.webp?alt=media&token=c28668b7-2934-48b8-9fc6-8e2568d32f66"
                     class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block" style="right: -40%; left: 0; bottom: 30%; padding: 0;">
-                    <h5>Tú controlas el ambiente</h5>
-                    <p>No es una fiesta hasta que no presiones play</p>
-                    <button type="button" class="btn btn-dark"
-                        style="border-radius: 20px; padding:10px 30px">Comprar</button>
+                <div class="carousel-caption d-md-block" style="right: -40%; left: 0; bottom: 25%; padding: 0;">
+                    <h5 class="c-title">Tú controlas el ambiente</h5>
+                    <p class="c-text">No es una fiesta hasta que no presiones play</p>
+                    <button type="button" class="btn btn-dark btn-sm"
+                        style="border-radius: 20px; padding:10px 30px;">Comprar</button>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/CARRUSEL%2FCarrusel_2.webp?alt=media&token=6232ce8c-df60-4d62-a7ac-54b5fd10c2dd"
                     class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block" style="right: -40%; left: 0; bottom: 30%; padding: 0;">
-                    <h5>El sonido ahora es personal</h5>
-                    <p>NUEVOS | QUIETCOMFORT® EARBUDS II</p>
-                    <button type="button" class="btn btn-dark"
-                        style="border-radius: 20px; padding:10px 30px">Comprar</button>
+                <div class="carousel-caption d-md-block" style="right: -40%; left: 0; bottom: 25%; padding: 0;">
+                    <h5 class="c-title">El sonido ahora es personal</h5>
+                    <p class="c-text">NUEVOS | QUIETCOMFORT® EARBUDS II</p>
+                    <button type="button" class="btn btn-dark btn-sm"
+                        style="border-radius: 20px; padding:10px 30px;">Comprar</button>
                 </div>
             </div>
         </div>
@@ -94,6 +93,38 @@
 </div>
 
 <style>
+    /* BANNER */
+
+    .carousel {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+    }
+
+    .carousel-inner .carousel-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .c-title {
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .c-text {
+        font-size: 0.7rem;
+    }
+
+    /* BANNER END */
+
+    /* BODY */
+
     .body-tittle {
         font-size: x-large;
         display: flex;
@@ -121,6 +152,8 @@
         justify-content: center;
         width: 100%;
     }
+
+    /* BODY END*/
 
     @@media(min-width: 575px) {
 

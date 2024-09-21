@@ -83,36 +83,6 @@ button.accept-policy {
 
 /* NAVBAR END */
 
-/* BANNER */
-
-.carousel {
-  width: 100%;
-  max-width: 100%;
-  position: relative;
-}
-
-.carousel-inner .carousel-item img {
-  width: 100%;
-  height: auto;
-}
-
-.container {
-  margin: 0;
-  padding: 0;
-  max-width: 100%;
-}
-
-.btn {
-  border-radius: 150px;
-}
-
-/* BANNER END */
-
-/* BODY */
-
-
-/* BODY END*/
-
 /* FOOTER */
 
 .footer {
