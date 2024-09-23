@@ -25,13 +25,11 @@ namespace boseapp.Controllers
         public IActionResult Index()
         {
             var miscontactos = from o in _context.DataContacto select o;
-            _logger.LogDebug("contactos {miscontactos}", miscontactos);
             var viewModel = new ContactoViewModel
             {
                 FormContacto = new Contacto(),
-                ListContacto = miscontactos
+                ListContacto = [.. miscontactos.OrderBy(c => c.Id)]
             };
-            _logger.LogDebug("viewModel {viewModel}", viewModel);
             return View(viewModel);
         }
 
@@ -46,17 +44,55 @@ namespace boseapp.Controllers
                 return BadRequest("FormContacto cannot be null");
             }
 
-            var contacto = new Contacto
+            if (viewModel.FormContacto.Id == 0)
             {
-                Nombre = viewModel.FormContacto.Nombre,
-                Email = viewModel.FormContacto.Email,
-                Message = viewModel.FormContacto.Message
-            };
+                var contacto = new Contacto
+                {
+                    Nombre = viewModel.FormContacto.Nombre,
+                    Email = viewModel.FormContacto.Email,
+                    Message = viewModel.FormContacto.Message
+                };
 
-            _context.Add(contacto);
+                _context.Add(contacto);
+                _context.SaveChanges();
+
+                TempData["Message"] = "Se registró el contacto correctamente";
+            }
+            else
+            {
+                var contacto = _context.DataContacto.FirstOrDefault(c => c.Id == viewModel.FormContacto.Id);
+                if (contacto == null)
+                {
+                    return NotFound("Contacto no encontrado");
+                }
+
+                contacto.Nombre = viewModel.FormContacto.Nombre;
+                contacto.Email = viewModel.FormContacto.Email;
+                contacto.Message = viewModel.FormContacto.Message;
+
+                _context.Update(contacto);
+                _context.SaveChanges();
+
+                TempData["Message"] = "Se actualizó el contacto correctamente";
+            }
+
+            var miscontactos = from o in _context.DataContacto select o;
+            viewModel.ListContacto = [.. miscontactos.OrderBy(c => c.Id)];
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult EliminarPorId(int id)
+        {
+            var contacto = _context.DataContacto.FirstOrDefault(c => c.Id == id);
+            if (contacto == null)
+            {
+                return NotFound("Contacto no encontrado");
+            }
+
+            _context.DataContacto.Remove(contacto);
             _context.SaveChanges();
-
-            ViewData["Message"] = "Se registro el contacto correctamente";
 
             return RedirectToAction(nameof(Index));
         }
