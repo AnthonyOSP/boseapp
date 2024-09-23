@@ -101,7 +101,13 @@
         document.getElementById('FormContacto_Nombre').value = nombre;
         document.getElementById('FormContacto_Email').value = email;
         document.getElementById('FormContacto_Message').value = message;
+        var submitButton = document.querySelector('#contactForm button[type="submit"]');
+        submitButton.textContent = 'Confirmar Edición';
+        submitButton.classList.remove('btn-dark');
+        submitButton.classList.add('btn-success');
+
     }
+
 
     window.onload = function () {
     @* var successMessage = document.getElementById('successMessage');
