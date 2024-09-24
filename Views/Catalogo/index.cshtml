@@ -9,92 +9,320 @@
     catalogos = @Model.itemsCatalogos;
 }
 
-<style>
-    .card-fixed {
-        height: 10rem;
-        overflow: hidden;
-        position: relative;
-        margin-bottom: 2rem;
-    }
-
-    .card-title {
-        height: 3rem;
-    }
-
-    .card-text::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2rem;
-        background: linear-gradient(to top, white, transparent);
-    }
-
-    .card-text.expanded::after {
-        opacity: 0;
-    }
-
-    .see-more {
-        position: absolute;
-        bottom: 4rem;
-        left: 1rem;
-        background: none;
-        cursor: pointer;
-        color: blue;
-    }
-</style>
-
-<h1>@ViewData["Title"]</h1>
+<h1 class="mt-4">@ViewData["Title"]</h1>
 
 <div class="container">
     <h1>@ViewData["Message"]</h1>
+
+    @* <div class="row">
+    <div class="col">
+    <div id="products" class="mb-3">
     <div class="row">
-        <div class="col">
-            <div id="products" class="mb-3">
-                <div class="row">
-                    @foreach (Producto item in Model.itemsCatalogos)
-                    {
-                        <div class="col-sm-4">
-                            <div class="card mb-4" style="width: 18rem;">
-                                <img src="@item.ImagenURL" class="card-img-top" alt="@item.Nombre">
-                                <div class="card-body ">
-                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                                    <p class="card-text card-fixed">@Html.DisplayFor(modelItem => item.Descripcion)</p>
-                                    <span class="see-more" onclick="toggleText(this)" style="display: none;">ver
-                                        más</span>
-                                    <a href="#" class="btn btn-primary">$@Html.DisplayFor(modelItem => item.Precio)</a>
-                                </div>
-                            </div>
+    @foreach (Producto item in Model.itemsCatalogos)
+    {
+    <div class="col-sm-4">
+    <div class="card mb-4" style="width: 18rem;">
+    <img src="@item.ImagenURL" class="card-img-top" alt="@item.Nombre">
+    <div class="card-body ">
+    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+    <p class="card-text card-fixed">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+    <span class="see-more" onclick="toggleText(this)" style="display: none;">ver
+    más</span>
+    <div class="card-precio">
+    <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+    <p>$@Html.DisplayFor(modelItem => item.Precio)</p>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    }
+    </div>
+    </div>
+    </div>
+    </div> *@
+
+    <div class="row">
+        @foreach (Producto item in Model.itemsCatalogos)
+        {
+            <div class="col-6">
+                <div class="wsk-cp-product">
+                    <div class="wsk-cp-img">
+                        <img src="@item.ImagenURL" alt="@item.Nombre" class="img-responsive" />
+                    </div>
+                    <div class="wsk-cp-text">
+                        <div class="precio">
+                            <span>$@Html.DisplayFor(modelItem => item.Precio)</span>
                         </div>
-                    }
+                        <div class="title-product">
+                            <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
+                        </div>
+                        <div class="description-prod">
+                            <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                        </div>
+                        <div class="card-footer1">
+                            <a class="btn-carrito"><span>Agregar Al Carrito</span><em><img
+                                        src="https://img.icons8.com/?size=100&id=85180&format=png&color=000000"
+                                        alt="carrito-icon" class="carrito-icon"></em></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const cards = document.querySelectorAll('.card-text');
-        cards.forEach(card => {
-            if (card.scrollHeight > card.clientHeight) {
-                const seeMore = card.nextElementSibling;
-                seeMore.style.display = 'inline';
-            }
-        });
-    });
-
-    function toggleText(element) {
-        const cardText = element.previousElementSibling;
-        if (cardText.style.height === 'auto') {
-            cardText.style.height = '10rem';
-            element.innerText = 'ver más';
-            cardText.classList.remove('expanded');
-        } else {
-            cardText.style.height = 'auto';
-            element.innerText = 'ver menos';
-            cardText.classList.add('expanded');
         }
-    }
-</script>
+
+
+
+        <style>
+            @@import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i');
+
+            .wsk-cp-product {
+                background: #fff;
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                position: relative;
+                margin: 20px auto;
+                height: 450px;
+                width: 100%;
+            }
+
+            .wsk-cp-img {
+                position: absolute;
+                top: 5px;
+                left: 50%;
+                transform: translate(-50%);
+                -webkit-transform: translate(-50%);
+                -ms-transform: translate(-50%);
+                -moz-transform: translate(-50%);
+                -o-transform: translate(-50%);
+                -khtml-transform: translate(-50%);
+                width: 100%;
+                padding: 15px;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .wsk-cp-img img {
+                width: 100%;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .wsk-cp-product:hover .wsk-cp-img {
+                top: -40px;
+            }
+
+            .wsk-cp-product:hover .wsk-cp-img img {
+                filter: drop-shadow(-10px 5px 10px rgba(0, 0, 0, 0.7));
+            }
+
+            .wsk-cp-text {
+                padding-top: 100%;
+            }
+
+            .wsk-cp-text .precio {
+                text-align: center;
+                font-size: 11px;
+                font-weight: bold;
+                padding: 4px;
+                margin-bottom: 45px;
+                position: relative;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .wsk-cp-text .precio>* {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                -o-transform: translate(-50%, -50%);
+                -khtml-transform: translate(-50%, -50%);
+
+            }
+
+            .wsk-cp-text .precio>span {
+                padding: 10px 20px;
+                border: 1px solid #313131;
+                background: #212121;
+                color: #fff;
+                box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+                border-radius: 27px;
+                transition: all 0.05s ease-in-out;
+
+            }
+
+            .wsk-cp-product:hover .wsk-cp-text .precio>span {
+                border-color: #ddd;
+                box-shadow: none;
+                padding: 9px 18px;
+            }
+
+            .wsk-cp-text .title-product {
+                text-align: center;
+            }
+
+            .wsk-cp-text .title-product h3 {
+                font-size: 15px;
+                font-weight: bold;
+                margin: 15px auto;
+                overflow: hidden;
+                width: 100%;
+                height: auto;
+            }
+
+            .wsk-cp-text .description-prod p {
+                height: auto;
+                position: relative;
+                margin-bottom: 2rem;
+            }
+
+            .wsk-cp-text .description-prod p::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 1rem;
+                text-overflow: ellipsis;
+            }
+
+            /* Truncate */
+            .wsk-cp-text .description-prod {
+                text-align: center;
+                width: 100%;
+                height: 69px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+
+            @@mediascreen and (max-width: 991px) {
+                .wsk-cp-product {
+                    margin: 40px auto;
+                }
+
+                .wsk-cp-product .wsk-cp-img {
+                    top: -40px;
+                }
+
+                .wsk-cp-product .wsk-cp-img img {
+                    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+                }
+
+                .wsk-cp-product .wsk-cp-text .precio>span {
+                    border-color: #ddd;
+                    box-shadow: none;
+                    padding: 11px 28px;
+                }
+
+                .wsk-cp-product .wsk-cp-text .precio {
+                    margin-top: 0px;
+                }
+            }
+
+            /* BOTON CARRITO*/
+
+            .btn-carrito {
+                cursor: pointer;
+                background-color: #fff;
+                width: 100%;
+                height: 50px;
+                line-height: 64px;
+                position: absolute;
+                left: 50%;
+                top: 95%;
+                transform: translate(-50%, -50%);
+                z-index: 0;
+                border-radius: 0 0 6px 6px;
+                border-top: 1px solid rgba(0, 0, 0, 0.12);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                display: flex;
+                align-items: center;
+
+            }
+
+            .btn-carrito span {
+                color: #212121;
+                display: block;
+                padding-left: 35px;
+                text-transform: uppercase;
+                font: bold 12px Arial;
+                transform: scaleX(0.6);
+                letter-spacing: 4px;
+                transform-origin: center left;
+                transition: color 0.3s ease;
+                position: relative;
+                z-index: 1;
+                text-wrap: nowrap;
+            }
+
+            .btn-carrito em {
+                position: absolute;
+                right: 5%;
+                top: -20%;
+                transform-origin: center right;
+                transition: all 0.3s ease;
+                z-index: 1;
+            }
+
+            .btn-carrito em img {
+                width: 2rem;
+            }
+
+            .btn-carrito:before,
+            .btn-carrito:after {
+                content: '';
+                background: #212121;
+                height: 50%;
+                width: 0;
+                position: absolute;
+                transition: .3s cubic-bezier(.785, .135, .15, .86);
+            }
+
+            .btn-carrito:before {
+                top: 0;
+                left: 0;
+                right: auto;
+            }
+
+            .btn-carrito:after {
+                bottom: 0;
+                right: 0;
+                left: auto;
+                border-radius: 0 0 6px 6px;
+            }
+
+            .btn-carrito:hover:before {
+                width: 100%;
+                right: 0;
+                left: auto;
+            }
+
+            .btn-carrito:hover:after {
+                width: 100%;
+                left: 0;
+                right: auto;
+            }
+
+            .btn-carrito:hover span {
+                color: #fff;
+            }
+        </style>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const btnCarrito = document.querySelector('.btn-carrito');
+                const carritoIcon = document.querySelector('.carrito-icon');
+                const originalSrc = carritoIcon.src;
+
+                btnCarrito.addEventListener('mouseover', function () {
+                    carritoIcon.src = 'https://img.icons8.com/?size=100&id=85180&format=png&color=FFFFFF';
+                });
+
+                btnCarrito.addEventListener('mouseout', function () {
+                    carritoIcon.src = originalSrc;
+                });
+            });
+        </script>
