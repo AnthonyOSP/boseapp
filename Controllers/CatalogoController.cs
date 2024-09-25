@@ -28,8 +28,8 @@ namespace boseapp.Controllers
             var catalogos = from o in _context.DataProducto select o;
             var categoria = from o in _context.DataCategoria select o;
             dynamic model = new ExpandoObject();
-            model.itemsCategoria = categoria;
-            model.itemsCatalogos = catalogos;
+            model.itemCategoria = categoria;
+            model.itemCatalogos = catalogos;
             return View(model);
         }
 
