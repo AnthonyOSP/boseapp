@@ -43,17 +43,19 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 fs-5">
                             <li class="nav-item">
                                 <a class="nav-link text-light " aria-current="page" asp-area="" asp-controller="Home"
-                                    asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Contacto"
-                                    asp-action="Index">Contacto</a>
+                                    asp-action="Index">Inicio</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Catalogo"
                                     asp-action="Index">Catalogo</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Contacto"
+                                    asp-action="Index">Contacto</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home"
                                     asp-action="Privacy"></a>
@@ -68,7 +70,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main">
+        <main role="main" style="width: 100%;">
             @RenderBody()
         </main>
     </div>

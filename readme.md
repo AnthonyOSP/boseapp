@@ -49,6 +49,21 @@ dotnet add package
 
 En el archivo Program.cs, cambiar el connectionString por la DB de postgreSQL igual al que esta en appsettings.json, tambien modificar el options.UseSQLite por options.UseNpgsql;
 
+## 10. Para modificar el LOGIN, REGISTRAR, ETC
+
+Agrega lo siguiente en el <nameApp>.csproj, ejemplo boseapp.csproj
+
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
+
+dotnet restore
+
+dotnet tool install --global dotnet.aspnet.codegenerator --version 8.0.5
+
+dotnet aspnet-codegenerator identity -dc <AplicationName>.Data.ApplicationDbContext --files "Account.Register;Account.Login"
+Ejemplo:
+dotnet aspnet-codegenerator identity -dc boseapp.Data.ApplicationDbContext --files "Account.Register;Account.Login"
+
 ### INICIAR TU PROYECTO
 
 dotnet watch run
