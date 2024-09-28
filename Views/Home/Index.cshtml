@@ -491,10 +491,6 @@
         videoIdx = Math.max(0, newVideoIndex);
         hideVideos(videoIdx);
     }
-    function updateLoading() {
-        aBox.style.cssText = `width:${loadPer}%`;
-        loadPer = (loadPer + 0.2) % 100;
-    }
 
     function moveVideo(offset = 1) {
         loadPer = 2;
@@ -506,9 +502,6 @@
     setInterval(() => {
         moveVideo();
     }, loopTime);
-    setInterval(() => {
-        updateLoading();
-    }, loopTime / 500);
 
     function handleMouseDown(event) {
         isDragging = true;
@@ -525,12 +518,4 @@
             moveVideo();
         }
     }
-
-    function loadDocumet() {
-        // videoHero.style.display = "block";
-    }
-
-    document.getElementsByClassName("how-to")[0].addEventListener("click", () => {
-        window.open("https://www.youtube.com/watch?v=KHWTqYHndrc", "_blank");
-    });
 </script>
