@@ -28,7 +28,7 @@
                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password"
                     aria-required="true" type="password" placeholder="Password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
-                <a href="#">Olvidaste tu contraseña?</a>
+                <a id="forgot-password" asp-page="./ForgotPassword">Olvidaste tu contraseña?</a>
                 <button id="login-submit" type="submit">INGRESA</button>
             </form>
         </div>
@@ -38,7 +38,7 @@
                     <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/bose_mobile_logo.png?alt=media&token=2e9e26ba-9574-4b05-88ed-79469b67f5de"
                         alt="boselogo">
                     <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal.</p>
-                    <button class="ghost" id="signIn">Sign In</button>
+                    <button class="ghost" id="signIn">Ingresar</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/bose_mobile_logo.png?alt=media&token=2e9e26ba-9574-4b05-88ed-79469b67f5de"
@@ -101,21 +101,6 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-    }
-
-    .social-container {
-        margin: 20px 0;
-    }
-
-    .social-container a {
-        border: 1px solid #ddd;
-        border-radius: 50%;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 5px;
-        height: 40px;
-        width: 40px;
     }
 
     .form-container input {

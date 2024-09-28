@@ -43,7 +43,8 @@
                             <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
                         </div>
                         <div class="card-footer1">
-                            <a class="btn-carrito"><span>Agregar Al Carrito</span><em><img
+                            <a class="btn-carrito" asp-controller="Carrito" asp-action="Add"
+                                asp-route-id="@item.Id"><span>Agregar Al Carrito</span><em><img
                                         src="https://img.icons8.com/?size=100&id=85180&format=png&color=000000"
                                         alt="carrito-icon" class="carrito-icon"></em></a>
                         </div>

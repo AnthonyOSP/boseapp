@@ -64,6 +64,16 @@ dotnet aspnet-codegenerator identity -dc <AplicationName>.Data.ApplicationDbCont
 Ejemplo:
 dotnet aspnet-codegenerator identity -dc boseapp.Data.ApplicationDbContext --files "Account.Register;Account.Login"
 
+Otras opciones:
+Account.ForgotPassword: Página para solicitar un correo de recuperación de contraseña.
+Account.ResetPassword: Página para restablecer la contraseña usando el enlace enviado al correo.
+Account.ConfirmEmail: Página para confirmar la dirección de correo electrónico después del registro.
+Account.AccessDenied: Página que muestra cuando un usuario intenta acceder a un recurso restringido.
+Account.ExternalLogin: Página para manejar logins externos, como Google, Facebook, etc.
+Account.Manage: Página para que los usuarios administren su cuenta (cambiar contraseña, etc.).
+Account.Logout: Acción para cerrar sesión.
+Account.Lockout: Página que muestra cuando una cuenta ha sido bloqueada.
+
 ### INICIAR TU PROYECTO
 
 dotnet watch run
