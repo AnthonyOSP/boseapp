@@ -22,6 +22,7 @@ namespace boseapp.Helper
         {
             Env.Load();
             smtpPass = Environment.GetEnvironmentVariable("SMTP_PASS");
+            Console.WriteLine($"SMTP_PASS loaded: {smtpPass}");
         }
 
         public async Task EnviarCorreoAsync(string emailTo, string subject, string body)

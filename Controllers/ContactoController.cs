@@ -66,6 +66,7 @@ namespace boseapp.Controllers
                 TempData["Message"] = "Se registró el contacto correctamente";
 
                 var __apikey = Environment.GetEnvironmentVariable("SMTP_PASS");
+                _logger.LogDebug($"SMTP_PASS: {__apikey}");
 
                 if (!string.IsNullOrEmpty(viewModel.FormContacto.Email))
                 {
