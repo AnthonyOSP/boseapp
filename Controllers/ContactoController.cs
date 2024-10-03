@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using boseapp.Data;
 using boseapp.Models;
 using boseapp.ViewModel;
+using boseapp.Helper;
 
 namespace boseapp.Controllers
 {
@@ -16,10 +19,13 @@ namespace boseapp.Controllers
         private readonly ILogger<ContactoController> _logger;
         private readonly ApplicationDbContext _context;
 
+        private readonly SendMail _sendMail;
+
         public ContactoController(ILogger<ContactoController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
+            _sendMail = new SendMail();
         }
 
         public IActionResult Index()
@@ -34,7 +40,7 @@ namespace boseapp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Enviar(ContactoViewModel viewModel)
+        public async Task<IActionResult> Enviar(ContactoViewModel viewModel)
         {
             _logger.LogDebug("Ingreso a enviar mensaje");
 
@@ -53,10 +59,26 @@ namespace boseapp.Controllers
                     Message = viewModel.FormContacto.Message
                 };
 
+
                 _context.Add(contacto);
                 _context.SaveChanges();
 
                 TempData["Message"] = "Se registró el contacto correctamente";
+                if (!string.IsNullOrEmpty(viewModel.FormContacto.Email))
+                {
+                    if (!string.IsNullOrEmpty(viewModel.FormContacto.Message))
+                    {
+                        await _sendMail.EnviarCorreoAsync(viewModel.FormContacto.Email, "Nuevo Contacto", viewModel.FormContacto.Message);
+                    }
+                    else
+                    {
+                        _logger.LogError("Message is null or empty");
+                    }
+                }
+                else
+                {
+                    _logger.LogError("Email is null or empty");
+                }
             }
             else
             {
