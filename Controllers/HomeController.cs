@@ -1,5 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using boseapp.Models;
 
 
@@ -8,10 +11,12 @@ namespace boseapp.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ICompositeViewEngine _viewEngine;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ICompositeViewEngine viewEngine)
     {
         _logger = logger;
+        _viewEngine = viewEngine;
     }
 
     public IActionResult Index()
@@ -24,7 +29,42 @@ public class HomeController : Controller
             SameSite = SameSiteMode.Strict // Evita que la cookie sea enviada en solicitudes cross-site
         };
         Response.Cookies.Append("MyCookieApp", "app2game", cookieOptions);
+
+        ViewData["HomeScript"] = RenderPartialViewToString("_HomeScript");
+
         return View();
+    }
+
+    private string RenderPartialViewToString(string viewName)
+    {
+        try
+        {
+            using (var writer = new StringWriter())
+            {
+                var viewResult = _viewEngine.FindView(ControllerContext, viewName, false);
+                if (!viewResult.Success)
+                {
+                    throw new FileNotFoundException($"View {viewName} not found.");
+                }
+
+                var viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    writer,
+                    new HtmlHelperOptions()
+                );
+
+                viewResult.View.RenderAsync(viewContext).GetAwaiter().GetResult();
+                return writer.GetStringBuilder().ToString();
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error rendering view to string");
+            return string.Empty;
+        }
     }
 
     public IActionResult Privacy()
@@ -32,8 +72,7 @@ public class HomeController : Controller
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public IActionResult Error(int statusCode)
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
