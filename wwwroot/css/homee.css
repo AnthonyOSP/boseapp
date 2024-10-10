@@ -51,7 +51,16 @@
 .card-colum {
     display: flex;
     justify-content: center;
-    margin: 10px 20px;
+    margin: 10px 10px;
+    transition-duration: 0.3s;
+
+}
+
+.card-colum:hover {
+    -webkit-box-shadow: -10px 10px 10px -15px rgba(0, 0, 0, 1);
+    -moz-box-shadow: -10px 10px 10px -15px rgba(0, 0, 0, 1);
+    box-shadow: -10px 10px 10px -15px rgba(0, 0, 0, 1);
+    transform: scale(1.1);
 }
 
 .card-container {
@@ -59,6 +68,19 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+}
+
+.card {
+    width: 11rem;
+}
+
+.card-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.card-body a {
+    font-size: 0.7rem;
 }
 
 /*FEATURED*/
@@ -72,11 +94,17 @@
 /*FEATURED END*/
 
 /*VIDEO BODY */
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
 
 #video-hero {
     width: 100%;
-    height: 350px;
-    max-height: 350px;
+    height: auto;
     overflow: hidden;
     margin: 0 auto;
     font-family: sans-serif;
@@ -89,4 +117,106 @@
 .black-shadow,
 video {
     width: 100%;
+    height: 100%;
+}
+
+.video-wrapper {
+    overflow: hidden;
+}
+
+video {
+    object-fit: cover;
+}
+
+.hero-desc {
+    width: 90%;
+    height: fit-content;
+    bottom: 20px;
+    left: 20px;
+    color: #ffffff;
+}
+
+.hero-desc h1 {
+    font-weight: 700;
+    display: flex;
+}
+
+.hero-desc p {
+    max-width: 60%;
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-align: left;
+}
+
+.hero-desc:hover p {
+    animation-fill-mode: forwards;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    max-width: 80%;
+}
+
+.desc-shadow {
+    width: 50%;
+    height: 0px;
+    margin: 0 auto;
+    bottom: 0;
+    left: 0;
+    box-shadow: 70px -90px 150px 70px #0000006b;
+}
+
+.black-shadow {
+    bottom: 0;
+    left: 0;
+    background-color: #0000007d;
+    opacity: 0;
+    transition-timing-function: linear;
+    transition: all 0.2s ease-in-out;
+}
+
+.video-item:hover .black-shadow {
+    opacity: 0.7;
+}
+
+
+@media(min-width: 430px) {
+    .card {
+        width: 13rem;
+    }
+
+    .card-body a {
+        font-size: 0.9rem;
+    }
+}
+
+@media(min-width: 768px) {
+    .card {
+        width: 10rem;
+    }
+
+    .card-title {
+        font-size: 0.8rem;
+    }
+}
+
+@media(min-width: 1440px) {
+    .card {
+        width: 20rem;
+    }
+
+    .card-body a {
+        font-size: 1.2rem;
+        margin: 10px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        height: 3rem;
+    }
 }

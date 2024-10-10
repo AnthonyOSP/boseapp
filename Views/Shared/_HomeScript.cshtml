@@ -1,17 +1,13 @@
 <script>
     const videoHero = document.getElementById("video-hero");
     const videoItems = document.getElementsByClassName("video-item");
-    const nextBtn = document.getElementsByClassName("next-btn")[0];
     const videoTags = document.getElementsByTagName("video");
-    const aBox = document.querySelector(".loading-percent");
 
     videoHero.addEventListener("mousedown", handleMouseDown);
     videoHero.addEventListener("mouseup", handleMouseUp);
 
-    const videosLength = videoItems.length;
     const loopTime = 8000;
     let videoIdx = 0;
-    let loadPer = 2;
     let isDragging = false;
     let xPos = 0;
 
@@ -31,22 +27,8 @@
         }
     }
 
-    function loopVideos(offset = 1) {
-        let newVideoIndex = (videoIdx + offset) % videosLength;
-        videoIdx = Math.max(0, newVideoIndex);
-        hideVideos(videoIdx);
-    }
-
-    function moveVideo(offset = 1) {
-        loadPer = 2;
-        loopVideos(offset);
-    }
 
     hideVideos(videoIdx);
-    loopVideos();
-    setInterval(() => {
-        moveVideo();
-    }, loopTime);
 
     function handleMouseDown(event) {
         isDragging = true;
