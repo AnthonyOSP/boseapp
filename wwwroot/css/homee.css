@@ -91,6 +91,10 @@
     padding: 0;
 }
 
+.prod-card {
+    width: 100%;
+}
+
 /*FEATURED END*/
 
 /*VIDEO BODY */
@@ -203,6 +207,25 @@ video {
     .card-title {
         font-size: 0.8rem;
     }
+
+    .prodcontainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .prod-card {
+        width: 90%;
+    }
+
+    .prod-card img {
+        max-width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .prod-card-text {
+        height: 180px;
+    }
 }
 
 @media(min-width: 1440px) {
@@ -218,5 +241,46 @@ video {
     .card-title {
         font-size: 1.2rem;
         height: 3rem;
+    }
+
+    .card-content {
+        position: absolute;
+        z-index: 12000;
+        bottom: 8px;
+        left: 16px;
+    }
+
+    .prod-card::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: rgb(0, 0, 0);
+        background: linear-gradient(360deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+        z-index: 10000;
+    }
+
+    .card-header {
+        font-size: 30px;
+    }
+
+    .prodcontainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .prod-card {
+        margin-bottom: 1rem;
+        position: relative;
+        height: 900px;
+    }
+
+    .prod-card img {
+        width: 100%;
+        height: 900px;
+        object-fit: cover;
+        object-position: 0px 20%;
     }
 }
