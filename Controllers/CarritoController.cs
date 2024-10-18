@@ -27,7 +27,7 @@ namespace boseapp.Controllers
 
         public IActionResult Index()
         {
-            List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
+            List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion") ?? new List<Carrito>();
             if (carrito == null)
             {
                 carrito = new List<Carrito>();
@@ -47,7 +47,7 @@ namespace boseapp.Controllers
             else
             {
                 //obtengo el carrito de memoria
-                List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
+                List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion") ?? new List<Carrito>();
                 if (carrito == null)
                 {
                     carrito = new List<Carrito>();

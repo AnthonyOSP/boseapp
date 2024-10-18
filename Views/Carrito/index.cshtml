@@ -1,6 +1,8 @@
 @model IEnumerable<boseapp.Models.Carrito>
 
-
+@{
+    ViewData["Title"] = "Carrito";
+}
 
 
 <table class="table">
@@ -23,7 +25,14 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    @if (item.Producto != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cantidad)

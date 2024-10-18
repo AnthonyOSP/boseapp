@@ -42,22 +42,22 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 fs-5">
                             <li class="nav-item">
-                                <a class="nav-link text-light " aria-current="page" asp-area="" asp-controller="Home"
-                                    asp-action="Index">Inicio</a>
+                                <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "") "
+                                    aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Catalogo"
-                                    asp-action="Index">Catalogo</a>
+                                <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "Catalogo" ? "active" : "")"
+                                    asp-area="" asp-controller="Catalogo" asp-action="Index">Catalogo</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Contacto"
-                                    asp-action="Index">Contacto</a>
+                                <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contacto" ? "active" : "")"
+                                    asp-area="" asp-controller="Contacto" asp-action="Index">Contacto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Carrito"
-                                    asp-action="Index">Carrito</a>
+                                <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "Carrito" ? "active" : "")"
+                                    asp-area="" asp-controller="Carrito" asp-action="Index">Carrito</a>
                             </li>
                             <partial name="_MenuAdminPartial" />
                         </ul>
@@ -107,7 +107,10 @@
         <div class="f-branch">
             <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/bose_logo_white.png?alt=media&token=1bdfe212-6d26-4c88-a630-891031400905"
                 alt="logo" width="100" height="100">
-            <p style="font-size: small;"> &copy; Bose Corporation 2024 - PROYECTO FINAL</p>
+            <div class="f-text">
+                <p style="font-size: small;"> &copy; Bose Corporation 2024 - PROYECTO FINAL</p>
+            </div>
+
         </div>
     </footer>
 
@@ -116,6 +119,14 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+<style>
+    .nav-link.active {
+        color: #fff;
+        border-bottom: 3px solid;
+        border-image: linear-gradient(to right, transparent, #fff, transparent) 1;
+    }
+</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

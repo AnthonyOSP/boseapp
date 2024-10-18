@@ -168,11 +168,10 @@ video {
 
 .desc-shadow {
     width: 50%;
-    height: 0px;
     margin: 0 auto;
     bottom: 0;
     left: 0;
-    box-shadow: 70px -90px 150px 70px #0000006b;
+    box-shadow: 50px -75px 90px 50px #0000006c;
 }
 
 .black-shadow {
@@ -225,6 +224,14 @@ video {
 
     .prod-card-text {
         height: 180px;
+    }
+
+    .desc-shadow {
+        width: 50%;
+        margin: 0 auto;
+        bottom: 0;
+        left: 0;
+        box-shadow: 70px -90px 110px 70px #0000006b;
     }
 }
 

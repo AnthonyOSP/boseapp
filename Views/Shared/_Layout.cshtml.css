@@ -38,12 +38,6 @@ a {
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
 
 .border-top {
   border-top: 1px solid #e5e5e5;
@@ -155,6 +149,7 @@ button.accept-policy {
   margin-right: 15px;
 }
 
+
 /* FOOTER END*/
 @media (max-width: 768px) {
   .img-navbar {
@@ -164,5 +159,25 @@ button.accept-policy {
   .body-tittle {
     font-size: small;
     margin-left: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .f-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .f-text {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .f-branch img {
+    margin-left: 80px;
   }
 }
