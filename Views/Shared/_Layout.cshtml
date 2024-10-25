@@ -126,6 +126,30 @@
         border-bottom: 3px solid;
         border-image: linear-gradient(to right, transparent, #fff, transparent) 1;
     }
+
+    .nav-link:hover {
+        background-color: #333;
+        color: #fff;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    @@media(max-width: 768px) {
+
+        .nav-item {
+            font-size: 1.5rem;
+            margin: 10px;
+        }
+
+        .offcanvas-header {
+            font: 2rem sans-serif;
+        }
+
+        .offcanvas-end {
+            width: 300px;
+            box-shadow: -33px 0px 37px -33px rgba(0, 0, 0, 0.75);
+        }
+    }
 </style>
 
 <script>
