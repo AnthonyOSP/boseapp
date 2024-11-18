@@ -29,14 +29,46 @@ namespace boseapp.Controllers
             _currencyExchangeIntegration = currencyExchangeIntegration;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string currency = "PEN")
         {
             var catalogos = from o in _context.DataProducto select o;
             var categoria = from o in _context.DataCategoria select o;
+            var currencySymbol = "S/";
+
+            if (currency == "USD")
+            {
+                var exchangeRate = await _currencyExchangeIntegration.GetExchangeRate("PEN", "USD", 1);
+                currencySymbol = "$";
+                catalogos = catalogos.Select(p => new Producto
+                {
+                    // Clone all properties
+                    Id = p.Id,
+                    Nombre = p.Nombre,
+                    Descripcion = p.Descripcion,
+                    ImagenURL = p.ImagenURL,
+                    Precio = p.Precio * (decimal)exchangeRate.info.rate
+                });
+            }
+            else if (currency == "EUR")
+            {
+                var exchangeRate = await _currencyExchangeIntegration.GetExchangeRate("PEN", "EUR", 1);
+                currencySymbol = "$";
+                catalogos = catalogos.Select(p => new Producto
+                {
+                    Id = p.Id,
+                    Nombre = p.Nombre,
+                    Descripcion = p.Descripcion,
+                    ImagenURL = p.ImagenURL,
+                    Precio = p.Precio * (decimal)exchangeRate.info.rate
+                });
+            }
             dynamic model = new ExpandoObject();
             model.itemCategoria = categoria;
             model.itemCatalogos = catalogos;
+            model.CurrentCurrency = currency;
+            model.CurrencySymbol = currencySymbol;
             return View(model);
+
         }
 
         public async Task<IActionResult> Exchange(TipoCambioViewModel viewmodel)

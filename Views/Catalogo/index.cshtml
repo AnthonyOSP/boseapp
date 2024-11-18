@@ -11,7 +11,7 @@
 
 <h1 class="mt-4">@ViewData["Title"]</h1>
 
-<div class="btn-group" role="group" aria-label="Currency Selector">]
+<div class="btn-group" role="group" aria-label="Currency Selector">
 
     <div class="btn-group" role="group" aria-label="Currency Selector">
         <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="PEN"
@@ -51,7 +51,7 @@
                     </div>
                     <div class="wsk-cp-text">
                         <div class="precio">
-                            <span>$@Html.DisplayFor(modelItem => item.Precio)</span>
+                            <span>@Model.CurrencySymbol @Html.DisplayFor(modelItem => item.Precio)</span>
                         </div>
                         <div class="title-product">
                             <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
