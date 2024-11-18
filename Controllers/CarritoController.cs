@@ -15,10 +15,10 @@ namespace boseapp.Controllers
     public class CarritoController : Controller
     {
         private readonly ILogger<CarritoController> _logger;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<UserCliente> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public CarritoController(ILogger<CarritoController> logger, UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public CarritoController(ILogger<CarritoController> logger, UserManager<UserCliente> userManager, ApplicationDbContext context)
         {
             _logger = logger;
             _userManager = userManager;

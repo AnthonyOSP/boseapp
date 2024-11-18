@@ -1,10 +1,12 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿#nullable disable
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using boseapp.Models;
 
 namespace boseapp.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<UserCliente>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

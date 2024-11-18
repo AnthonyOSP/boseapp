@@ -1,0 +1,103 @@
+@page
+@model LoginRegisterModel
+
+@{
+    ViewData["Title"] = "Ingresar";
+}
+
+
+
+<div class="container" style="display: flex; justify-content: center; height: auto;">
+    <div class="containerds" id="containerds">
+        <div class="form-container sign-up-container">
+            <form id="registerForm" method="post">
+                <input type="hidden" name="action" value="register" />
+                <h1 class="r-tittle">Crea una cuenta</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating">
+                    <input asp-for="InputRegister.Email" class="form-control reg-input" autocomplete="username"
+                        aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="InputRegister.Email">Email</label>
+                    <span asp-validation-for="InputRegister.Email" class="text-danger logspan"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="InputRegister.Password" class="form-control reg-input" autocomplete="new-password"
+                        aria-required="true" placeholder="password" type="password" />
+                    <label asp-for="InputRegister.Password">Password</label>
+                    <span asp-validation-for="InputRegister.Password" class="text-danger logspan"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="InputRegister.ConfirmPassword" class="form-control reg-input"
+                        autocomplete="new-password" aria-required="true" placeholder="password" type="password" />
+                    <label asp-for="InputRegister.ConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="InputRegister.ConfirmPassword" class="text-danger logspan"></span>
+                </div>
+                <div class="form-floating ">
+                    <input asp-for="InputRegister.Nombre" class="form-control reg-input" autocomplete="Nombre"
+                        aria-required="true" placeholder="Nombre" />
+                    <label asp-for="InputRegister.Nombre">Nombre</label>
+                    <span asp-validation-for="InputRegister.Nombre" class="text-danger logspan"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="InputRegister.Apellido" class="form-control reg-input" autocomplete="Apellido"
+                        aria-required="true" placeholder="Apellido" />
+                    <label asp-for="InputRegister.Apellido">Apellido</label>
+                    <span asp-validation-for="InputRegister.Apellido" class="text-danger logspan"></span>
+                </div>
+                <button id="registerSubmit" type="submit" style="margin-top: 10px;">Registrate</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form id="account" method="post">
+                <input type="hidden" name="action" value="login" />
+                <h1>Ingresar</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <input asp-for="InputLogin.Email" class="form-control" autocomplete="username" aria-required="true"
+                    type="email" placeholder="name@example.com" />
+                <span asp-validation-for="InputLogin.Email" class="text-danger logspan"></span>
+                <input asp-for="InputLogin.Password" class="form-control" autocomplete="current-password"
+                    aria-required="true" type="password" placeholder="Password" />
+                <span asp-validation-for="InputLogin.Password" class="text-danger logspan"></span>
+                <a id="forgot-password" asp-page="./ForgotPassword" class="forgetpass">Olvidaste tu contraseña?</a>
+                <button id="loginSubmit" type="submit">INGRESA</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/bose_mobile_logo.png?alt=media&token=2e9e26ba-9574-4b05-88ed-79469b67f5de"
+                        alt="boselogo">
+                    <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal.</p>
+                    <button class="ghost" id="signIn">Ingresar</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/boseapp.appspot.com/o/bose_mobile_logo.png?alt=media&token=2e9e26ba-9574-4b05-88ed-79469b67f5de"
+                        alt="boselogo">
+                    <p>Ingresa tus datos personales y comienza tu viaje con nosotros.</p>
+                    <button class="ghost" id="signUp">Registrate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/loginregister.css">
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const containerds = document.getElementById('containerds');
+
+    signUpButton.addEventListener('click', () =>
+        containerds.classList.add('right-panel-active'));
+
+    signInButton.addEventListener('click', () =>
+        containerds.classList.remove('right-panel-active'));
+</script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

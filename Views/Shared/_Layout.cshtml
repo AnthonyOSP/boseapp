@@ -55,6 +55,12 @@
                                 <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contacto" ? "active" : "")"
                                     asp-area="" asp-controller="Contacto" asp-action="Index">Contacto</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "TipoCambio" ? "active" : "")"
+                                    asp-area="" asp-controller="TipoCambio" asp-action="Index">Tipo Cambio</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-light @(ViewContext.RouteData.Values["controller"]?.ToString() == "Carrito" ? "active" : "")"
                                     asp-area="" asp-controller="Carrito" asp-action="Index">Carrito</a>

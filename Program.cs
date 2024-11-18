@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using boseapp.Data;
+using boseapp.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,10 +21,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<UserCliente>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<boseapp.Integration.CurrencyExchange.CurrencyExchangeIntegration>();
 
 builder.Services.AddSession(options =>
 {
@@ -65,5 +68,5 @@ app.MapRazorPages();
 
 
 
-
 app.Run();
+
