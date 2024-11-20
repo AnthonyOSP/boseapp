@@ -14,7 +14,7 @@ body {
     overflow: hidden;
 }
 
-p {
+.errorP {
     font-family: "Bevan", cursive;
     font-size: 130px;
     margin: 5vh 0 0;
@@ -28,7 +28,7 @@ p {
     background-clip: text;
 }
 
-p span {
+.errorP span {
     font-size: 1.2em;
 }
 
@@ -58,7 +58,7 @@ code b {
     font-weight: 500;
 }
 
-a {
+.errorHome {
     color: #8abeb7;
     font-family: monospace;
     font-size: 20px;

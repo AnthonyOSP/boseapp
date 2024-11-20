@@ -52,7 +52,7 @@ namespace boseapp.Controllers
             else if (currency == "EUR")
             {
                 var exchangeRate = await _currencyExchangeIntegration.GetExchangeRate("PEN", "EUR", 1);
-                currencySymbol = "$";
+                currencySymbol = "€";
                 catalogos = catalogos.Select(p => new Producto
                 {
                     Id = p.Id,

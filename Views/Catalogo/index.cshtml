@@ -8,33 +8,28 @@
     categoria = @Model.itemCategoria;
     catalogos = @Model.itemCatalogos;
 }
-
-<h1 class="mt-4">@ViewData["Title"]</h1>
-
-<div class="btn-group" role="group" aria-label="Currency Selector">
-
-    <div class="btn-group" role="group" aria-label="Currency Selector">
-        <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="PEN"
-            class="btn @(Model.CurrentCurrency == "PEN" ? "btn-primary" : "btn-secondary")">SOL</a>
-        <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="USD"
-            class="btn @(Model.CurrentCurrency == "USD" ? "btn-primary" : "btn-secondary")">USD</a>
-        <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="EUR"
-            class="btn @(Model.CurrentCurrency == "EUR" ? "btn-success" : "btn-secondary")">EURO</a>
+<div class="catalogoHeader mt-4 mb-5">
+    <h1>@ViewData["Title"]</h1>
+    <div class="btnGroupMoneda">
+        <div class="btn-group" role="group" aria-label="Currency Selector">
+            <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="PEN"
+                class="btn @(Model.CurrentCurrency == "PEN" ? "btn-primary" : "btn-secondary")">SOL</a>
+            <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="USD"
+                class="btn @(Model.CurrentCurrency == "USD" ? "btn-primary" : "btn-secondary")">USD</a>
+            <a asp-controller="Catalogo" asp-action="Index" asp-route-currency="EUR"
+                class="btn @(Model.CurrentCurrency == "EUR" ? "btn-primary" : "btn-secondary")">EURO</a>
+        </div>
     </div>
-    @* <form asp-controller="Catalogo" asp-action="Exchange" method="post">
-        <input type="hidden" name="To" value="USD" />
-        <input type="hidden" name="Amount" id="amountUSD" />
-        <button type="submit" class="btn btn-secondary">USD</button>
-    </form> *@
 </div>
 
+
 <div class="container">
-    <div class="navbarNav " id="navbarNav">
-        <ul class="nav nav-tabs">
+    <div class="navbarCatalogo " id="navbarNav">
+        <ul class="breadcrumb">
             @foreach (Categoria item in Model.itemCategoria)
             {
-                <li class="nav-item">
-                    <a class="nav-link" href="#">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                <li class="nav-item_catalogo breadcrumb__item">
+                    <a class="nav-link_catalogo breadcrumb__title" href="#">@Html.DisplayFor(modelItem => item.Nombre)</a>
                 </li>
             }
         </ul>
@@ -44,7 +39,7 @@
 
         @foreach (Producto item in Model.itemCatalogos)
         {
-            <div class="col-6" style="margin-bottom: 5rem;">
+            <div class="col-6 productCatalogoCard" style="margin-bottom: 2rem;">
                 <div class="wsk-cp-product">
                     <div class="wsk-cp-img">
                         <img src="@item.ImagenURL" alt="@item.Nombre" class="img-responsive" />

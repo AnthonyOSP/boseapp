@@ -1,13 +1,89 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i');
 
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500|PT+Sans+Narrow:400,700|Play:400,700|Ubuntu+Condensed&display=swap&subset=cyrillic');
+
+.catalogoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbarCatalogo {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+.navbarCatalogo a {
+    text-decoration: none;
+    color: #212121;
+    font-size: 10px;
+}
+
+.breadcrumb {
+    display: flex;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.breadcrumb__item {
+    height: 100%;
+    background-color: white;
+    color: #252525;
+    font-family: 'Oswald', sans-serif;
+    border-radius: 7px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    transform: skew(-21deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    margin: 3px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.breadcrumb__item:hover {
+    background: #212121;
+    color: #FFF !important;
+}
+
+.breadcrumb__title {
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.breadcrumb__item:hover .breadcrumb__title {
+    color: white;
+}
+
+.btnGroupMoneda {
+    display: flex;
+    align-items: center;
+}
+
 .wsk-cp-product {
     background: #fff;
-    padding: 15px;
+    padding: 10px;
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     position: relative;
-    margin: 20px auto;
-    height: 92%;
+    margin: 15px auto;
+    height: 95%;
     width: 100%;
 }
 
@@ -32,7 +108,7 @@
 }
 
 .wsk-cp-product:hover .wsk-cp-img {
-    top: -40px;
+    top: -30px;
 }
 
 .wsk-cp-product:hover .wsk-cp-img img {
@@ -45,10 +121,10 @@
 
 .wsk-cp-text .precio {
     text-align: center;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     padding: 3px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     position: relative;
     transition: all 0.2s ease-in-out;
 }
@@ -71,16 +147,20 @@
     border: 1px solid #313131;
     background: #212121;
     color: #fff;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.30), 0 5px 12px rgba(0, 0, 0, 0.22);
     border-radius: 27px;
     transition: all 0.05s ease-in-out;
-
+    width: 70%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wsk-cp-product:hover .wsk-cp-text .precio>span {
     border-color: #ddd;
     box-shadow: none;
-    padding: 9px 18px;
+    padding: 7px 13px;
 }
 
 .wsk-cp-text .title-product {
@@ -88,7 +168,7 @@
 }
 
 .wsk-cp-text .title-product h3 {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     margin: 15px auto;
     overflow: hidden;
@@ -125,29 +205,6 @@
     -webkit-box-orient: vertical;
 }
 
-@media screen and (max-width: 991px) {
-    .wsk-cp-product {
-        margin: 40px auto;
-    }
-
-    .wsk-cp-product .wsk-cp-img {
-        top: -40px;
-    }
-
-    .wsk-cp-product .wsk-cp-img img {
-        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-    }
-
-    .wsk-cp-product .wsk-cp-text .precio>span {
-        border-color: #ddd;
-        box-shadow: none;
-        padding: 11px 28px;
-    }
-
-    .wsk-cp-product .wsk-cp-text .precio {
-        margin-top: 0px;
-    }
-}
 
 /* BOTON CARRITO*/
 
@@ -236,4 +293,26 @@
 
 .btn-carrito:hover span {
     color: #fff;
+}
+
+@media(min-width: 430px) {
+    .navbarCatalogo {
+        margin-bottom: 45px;
+    }
+}
+
+@media(min-width: 768px) {
+    .navbarCatalogo a {
+        font-size: 12px;
+    }
+}
+
+@media(min-width: 1440px) {
+    .navbarCatalogo a {
+        font-size: 16 px;
+    }
+
+    .productCatalogoCard {
+        width: 25%;
+    }
 }
