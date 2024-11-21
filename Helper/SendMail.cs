@@ -16,7 +16,7 @@ namespace boseapp.Helper
         private readonly string smtpUser = "7d3afd002@smtp-brevo.com";
         private readonly string? smtpPass;
         private readonly string senderEmail = "anthonysaa93@gmail.com"; // Reemplaza con un remitente validado
-        private readonly string senderName = "Anthony Saa";
+        private readonly string senderName = "Bose Store";
 
         public SendMail()
         {

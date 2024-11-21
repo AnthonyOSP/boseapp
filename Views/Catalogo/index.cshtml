@@ -26,10 +26,14 @@
 <div class="container">
     <div class="navbarCatalogo " id="navbarNav">
         <ul class="breadcrumb">
+            <li class="nav-item_catalogo breadcrumb__item @(ViewBag.CurrentCategoriaId == null ? "active" : "")">
+                <a asp-controller="Catalogo" asp-action="Index" class="nav-link_catalogo breadcrumb__title">Todos</a>
+            </li>
             @foreach (Categoria item in Model.itemCategoria)
             {
-                <li class="nav-item_catalogo breadcrumb__item">
-                    <a class="nav-link_catalogo breadcrumb__title" href="#">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                <li class="nav-item_catalogo breadcrumb__item @(item.Id == ViewBag.CurrentCategoriaId ? "active" : "")">
+                    <a asp-controller="Catalogo" asp-action="Index" asp-route-categoriaId="@item.Id"
+                        class="nav-link_catalogo breadcrumb__title">@item.Nombre</a>
                 </li>
             }
         </ul>

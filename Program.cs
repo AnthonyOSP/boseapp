@@ -27,6 +27,7 @@ builder.Services.AddDefaultIdentity<UserCliente>(options => options.SignIn.Requi
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<boseapp.Integration.CurrencyExchange.CurrencyExchangeIntegration>();
+builder.Services.AddScoped<boseapp.Service.ProductoService>();
 
 builder.Services.AddSession(options =>
 {

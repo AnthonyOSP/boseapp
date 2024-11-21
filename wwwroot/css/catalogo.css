@@ -55,8 +55,13 @@
     cursor: pointer;
 }
 
-.breadcrumb__item:hover {
+.breadcrumb__item:hover,
+.breadcrumb__item.active {
     background: #212121;
+}
+
+.breadcrumb__item:hover .breadcrumb__title,
+.breadcrumb__item.active .breadcrumb__title {
     color: #FFF !important;
 }
 
@@ -89,7 +94,7 @@
 
 .wsk-cp-img {
     position: absolute;
-    top: 5px;
+    top: -1%;
     left: 50%;
     transform: translate(-50%);
     -webkit-transform: translate(-50%);
@@ -108,11 +113,11 @@
 }
 
 .wsk-cp-product:hover .wsk-cp-img {
-    top: -30px;
+    top: -5%;
 }
 
 .wsk-cp-product:hover .wsk-cp-img img {
-    filter: drop-shadow(-10px 5px 10px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.5));
 }
 
 .wsk-cp-text {
@@ -121,7 +126,7 @@
 
 .wsk-cp-text .precio {
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     padding: 3px;
     margin-bottom: 30px;

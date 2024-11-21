@@ -4,3 +4,5 @@ x-rapidapi-key: fbb0077ff6mshe69fa543fd74042p15bde4jsn7c79a68f983d
 GET https://wft-geo-db.p.rapidapi.com/v1/geo/countries/US/regions
 x-rapidapi-key: fbb0077ff6mshe69fa543fd74042p15bde4jsn7c79a68f983d
 
+GET http://localhost:5228/api/producto http/1.1
+Accept: application/json
