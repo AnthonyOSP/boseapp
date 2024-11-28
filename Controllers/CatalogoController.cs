@@ -79,6 +79,7 @@ namespace boseapp.Controllers
             model.itemCatalogos = catalogos;
             model.CurrentCurrency = currency;
             model.CurrencySymbol = currencySymbol;
+            model.ImagenURL = catalogos.FirstOrDefault()?.ImagenURL;
             return View(model);
 
         }

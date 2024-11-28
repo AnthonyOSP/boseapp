@@ -8,6 +8,7 @@
     categoria = @Model.itemCategoria;
     catalogos = @Model.itemCatalogos;
 }
+
 <div class="catalogoHeader mt-4 mb-5">
     <h1>@ViewData["Title"]</h1>
     <div class="btnGroupMoneda">
@@ -21,7 +22,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="container">
     <div class="navbarCatalogo " id="navbarNav">
@@ -40,10 +40,9 @@
     </div>
 
     <div class="row">
-
         @foreach (Producto item in Model.itemCatalogos)
         {
-            <div class="col-6 productCatalogoCard" style="margin-bottom: 2rem;">
+            <div class="col-6 productCatalogoCard">
                 <div class="wsk-cp-product">
                     <div class="wsk-cp-img">
                         <img src="@item.ImagenURL" alt="@item.Nombre" class="img-responsive" />
@@ -60,30 +59,38 @@
                         </div>
                         <div class="card-footer1">
                             <a class="btn-carrito" asp-controller="Carrito" asp-action="Add"
-                                asp-route-id="@item.Id"><span>Agregar Al Carrito</span><em><img
-                                        src="https://img.icons8.com/?size=100&id=85180&format=png&color=000000"
-                                        alt="carrito-icon" class="carrito-icon"></em></a>
+                                asp-route-id="@item.Id"><span>Agregar Al Carrito</span></a>
                         </div>
                     </div>
                 </div>
             </div>
-
         }
+    </div>
 
-        <link rel="stylesheet" href="~/css/catalogo.css">
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="" class="img-responsive" />
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDescription"></p>
+                    <div class="precio">
+                        <span id="modalPrice"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="modalAddToCart" class="btn btn-primary" href="#">Agregar Al Carrito</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const btnCarrito = document.querySelector('.btn-carrito');
-                const carritoIcon = document.querySelector('.carrito-icon');
-                const originalSrc = carritoIcon.src;
-
-                btnCarrito.addEventListener('mouseover', function () {
-                    carritoIcon.src = 'https://img.icons8.com/?size=100&id=85180&format=png&color=FFFFFF';
-                });
-
-                btnCarrito.addEventListener('mouseout', function () {
-                    carritoIcon.src = originalSrc;
-                });
-            });
-        </script>
+    <link rel="stylesheet" href="~/css/catalogo.css">

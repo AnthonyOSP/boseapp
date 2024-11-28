@@ -2,6 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500|PT+Sans+Narrow:400,700|Play:400,700|Ubuntu+Condensed&display=swap&subset=cyrillic');
 
+.container {
+    margin-bottom: 20px;
+}
+
+.modal-body img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
 .catalogoHeader {
     display: flex;
     justify-content: space-between;
@@ -247,20 +257,6 @@
     text-wrap: nowrap;
 }
 
-.btn-carrito em {
-    position: absolute;
-    right: 5%;
-    top: -20%;
-    transform-origin: center right;
-    transition: all 0.3s ease;
-    z-index: 1;
-    display: none;
-}
-
-.btn-carrito em img {
-    width: 2rem;
-}
-
 .btn-carrito:before,
 .btn-carrito:after {
     content: '';
@@ -310,9 +306,22 @@
     .navbarCatalogo a {
         font-size: 12px;
     }
+
+    .wsk-cp-text .precio>span {
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .btn-carrito {
+        top: 96%;
+    }
+
+    .btn-carrito span {
+        font-size: 13px;
+    }
 }
 
-@media(min-width: 1440px) {
+@media(min-width: 1200px) {
     .navbarCatalogo a {
         font-size: 16 px;
     }

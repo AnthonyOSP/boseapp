@@ -77,3 +77,18 @@ Account.Lockout: Página que muestra cuando una cuenta ha sido bloqueada.
 ### INICIAR TU PROYECTO
 
 dotnet watch run
+
+Errores solucionados:
+
+### JSON cicliclo
+
+Se agrega JSONignore en el modelo
+[JsonIgnore]
+public ICollection<Producto>? Productos { get; set; }
+
+Ademas agremos en el Program.cs
+builder.Services.AddControllers()
+.AddJsonOptions(options =>
+{
+options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});

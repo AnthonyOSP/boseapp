@@ -12,5 +12,7 @@ namespace boseapp.Models
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+
+        public ICollection<Servicios> Servicios { get; set; }
     }
 }
