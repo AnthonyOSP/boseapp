@@ -18,7 +18,7 @@ namespace boseapp.Models
         public int Stock { get; set; }
         public string? SKU { get; set; }
         public string? ImagenURL { get; set; }
-        public DateTime FechaDeCreacion { get; set; } = DateTime.Now;
+        public DateTime FechaDeCreacion { get; set; } = DateTime.UtcNow;
         public bool Activo { get; set; } = true;
 
         // Foreign key for Categoria

@@ -26,8 +26,6 @@
         <tbody>
             @foreach (var servicio in Model)
             {
-                var peruTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
-                var fechaDeCreacionPeru = TimeZoneInfo.ConvertTimeFromUtc(servicio.FechaDeCreacion, peruTimeZone);
                 <tr>
                     <td>@servicio.Id</td>
                     <td>@servicio.Nombre</td>

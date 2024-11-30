@@ -1,9 +1,12 @@
+#nullable disable
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using boseapp.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 
 namespace boseapp.Controllers;
@@ -21,6 +24,11 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        if (User.IsInRole("admin"))
+        {
+            return RedirectToAction("Index", "AdminDashboard");
+        }
+
         var cookieOptions = new CookieOptions
         {
             Expires = DateTime.UtcNow.AddMinutes(30), // Duración de la cookie: 30 minutos
@@ -33,6 +41,7 @@ public class HomeController : Controller
         ViewData["HomeScript"] = RenderPartialViewToString("_HomeScript");
 
         return View();
+
     }
 
     private string RenderPartialViewToString(string viewName)
