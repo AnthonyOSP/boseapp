@@ -1,3 +1,4 @@
+#nullable disable
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,7 @@ using boseapp.Data;
 using boseapp.Models;
 using boseapp.ViewModel;
 using boseapp.Helper;
+using TextClasification;
 
 namespace boseapp.Controllers
 {
@@ -34,7 +36,7 @@ namespace boseapp.Controllers
             var viewModel = new ContactoViewModel
             {
                 FormContacto = new Contacto(),
-                ListContacto = [.. miscontactos.OrderBy(c => c.Id)]
+                ListContacto = miscontactos.OrderBy(c => c.Id).ToList()
             };
             return View(viewModel);
         }
@@ -44,68 +46,85 @@ namespace boseapp.Controllers
         {
             _logger.LogDebug("Ingreso a enviar mensaje");
 
-            if (viewModel.FormContacto == null)
+            MLModelTextClasif.ModelInput sampleData = new MLModelTextClasif.ModelInput()
             {
-                _logger.LogError("FormContacto is null");
-                return BadRequest("FormContacto cannot be null");
-            }
+                Comentario = viewModel.FormContacto.Message
+            };
 
-            if (viewModel.FormContacto.Id == 0)
+            MLModelTextClasif.ModelOutput output = MLModelTextClasif.Predict(sampleData);
+
+
+            var sortedScoresWithLabel = MLModelTextClasif.PredictAllLabels(sampleData);
+            var scoreKeyFirst = sortedScoresWithLabel.ToList()[0].Key;
+            var scoreValueFirst = sortedScoresWithLabel.ToList()[0].Value;
+            var scoreKeySecond = sortedScoresWithLabel.ToList()[1].Key;
+            var scoreValueSecond = sortedScoresWithLabel.ToList()[1].Value;
+
+            if (scoreKeyFirst == "1")
             {
-                var contacto = new Contacto
+                if (scoreValueFirst > 0.5)
                 {
-                    Nombre = viewModel.FormContacto.Nombre,
-                    Email = viewModel.FormContacto.Email,
-                    Message = viewModel.FormContacto.Message
-                };
-
-
-                _context.Add(contacto);
-                _context.SaveChanges();
-
-                TempData["Message"] = "Se registró el contacto correctamente";
-
-                var __apikey = Environment.GetEnvironmentVariable("SMTP_PASS");
-                _logger.LogDebug($"SMTP_PASS: {__apikey}");
-
-                if (!string.IsNullOrEmpty(viewModel.FormContacto.Email))
-                {
-                    if (!string.IsNullOrEmpty(viewModel.FormContacto.Message))
-                    {
-                        await _sendMail.EnviarCorreoAsync(viewModel.FormContacto.Email, "Nuevo Contacto", viewModel.FormContacto.Message);
-                    }
-                    else
-                    {
-                        _logger.LogError("Message is null or empty");
-                    }
+                    viewModel.FormContacto.Category = "Positivo";
                 }
                 else
                 {
-                    _logger.LogError("Email is null or empty");
+                    viewModel.FormContacto.Category = "Negativo";
                 }
             }
             else
             {
-                var contacto = _context.DataContacto.FirstOrDefault(c => c.Id == viewModel.FormContacto.Id);
-                if (contacto == null)
+                if (scoreValueFirst > 0.5)
                 {
-                    return NotFound("Contacto no encontrado");
+                    viewModel.FormContacto.Category = "Negativo";
                 }
+                else
+                {
+                    viewModel.FormContacto.Category = "Positivo";
+                }
+            }
 
-                contacto.Nombre = viewModel.FormContacto.Nombre;
-                contacto.Email = viewModel.FormContacto.Email;
-                contacto.Message = viewModel.FormContacto.Message;
 
-                _context.Update(contacto);
-                _context.SaveChanges();
+            Console.WriteLine($"{scoreKeyFirst,-40}{scoreValueFirst,-20}");
+            Console.WriteLine($"{scoreKeySecond,-40}{scoreValueSecond,-20}");
 
-                TempData["Message"] = "Se actualizó el contacto correctamente";
+            var contacto = new Contacto
+            {
+                Nombre = viewModel.FormContacto.Nombre,
+                Email = viewModel.FormContacto.Email,
+                Asunto = viewModel.FormContacto.Asunto,
+                Message = viewModel.FormContacto.Message,
+                Category = viewModel.FormContacto.Category
+            };
+
+
+            _context.Add(contacto);
+            _context.SaveChanges();
+
+            TempData["Message"] = "Se registró el contacto correctamente";
+
+            var __apikey = Environment.GetEnvironmentVariable("SMTP_PASS");
+            _logger.LogDebug($"SMTP_PASS: {__apikey}");
+
+            if (!string.IsNullOrEmpty(viewModel.FormContacto.Email))
+            {
+                if (!string.IsNullOrEmpty(viewModel.FormContacto.Message))
+                {
+                    await _sendMail.EnviarCorreoAsync(viewModel.FormContacto.Email, viewModel.FormContacto.Asunto, viewModel.FormContacto.Message);
+                }
+                else
+                {
+                    _logger.LogError("Message is null or empty");
+                }
+            }
+            else
+            {
+                _logger.LogError("Email is null or empty");
             }
 
             var miscontactos = from o in _context.DataContacto select o;
-            viewModel.ListContacto = [.. miscontactos.OrderBy(c => c.Id)];
+            viewModel.ListContacto = miscontactos.OrderBy(c => c.Id).ToList();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

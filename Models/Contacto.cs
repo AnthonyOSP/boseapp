@@ -13,7 +13,9 @@ namespace boseapp.Models
         public long Id { get; set; }
         public string? Nombre { get; set; }
         public string? Email { get; set; }
+        public string? Asunto { get; set; }
         public string? Message { get; set; }
+        public string? Category { get; set; }
 
     }
 }

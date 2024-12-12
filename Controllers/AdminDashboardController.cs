@@ -27,11 +27,35 @@ namespace boseapp.Controllers
 
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
+            return RedirectToAction(nameof(Inicio));
+        }
+
+        public IActionResult Inicio()
+        {
+            ViewData["Title"] = "Inicio - Dashboard Bose Store";
+            return View();
+        }
+
+        public IActionResult Estadistica()
+        {
+            ViewData["Title"] = "Estadísticas - Dashboard Bose Store";
+            return View();
+        }
+
+        public IActionResult Mensajes()
+        {
+            ViewData["Title"] = "Mensajes - Dashboard Bose Store";
+            return View();
+        }
+
+        public async Task<IActionResult> Productos()
+        {
+            ViewData["Title"] = "Productos - Dashboard Bose Store";
             var productos = await _productoService.GetAll();
             ViewBag.Categorias = await _productoService.GetAllCategorias();
-            return View("Index", productos);
+            return View("Productos", productos); // Make sure to use the correct view name
         }
 
         [HttpGet]
@@ -48,7 +72,7 @@ namespace boseapp.Controllers
             {
                 producto.Categoria = await _productoService.GetCategoria(producto.Categoria.Id);
                 await _productoService.Create(producto);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Productos));
             }
             return BadRequest();
         }
@@ -87,7 +111,7 @@ namespace boseapp.Controllers
 
                 await _productoService.Update(existingProducto);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Productos));
             }
             return BadRequest();
         }
@@ -104,7 +128,7 @@ namespace boseapp.Controllers
 
             await _productoService.Delete(id);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Productos));
         }
 
         [HttpPost]

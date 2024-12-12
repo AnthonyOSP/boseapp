@@ -1,3 +1,4 @@
+#nullable disable
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -64,6 +65,34 @@ namespace boseapp.Controllers
                 ViewData["Message"] = "Se Agrego al carrito";
                 _logger.LogInformation("Se agrego un producto al carrito");
                 return RedirectToAction("Index", "Catalogo");
+            }
+        }
+
+        public async Task<IActionResult> Delete(long? id)
+        {
+            var userName = _userManager.GetUserName(User);
+            if (userName == null)
+            {
+                _logger.LogInformation("No existe usuario");
+                ViewData["Message"] = "Por favor debe loguearse antes de eliminar un producto";
+                return RedirectToAction("Index", "Catalogo");
+            }
+            else
+            {
+                List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion") ?? new List<Carrito>();
+                if (carrito == null)
+                {
+                    carrito = new List<Carrito>();
+                }
+                var itemToRemove = carrito.FirstOrDefault(c => c.Producto.Id == id && c.UserName == userName);
+                if (itemToRemove != null)
+                {
+                    carrito.Remove(itemToRemove);
+                    Helper.SessionExtensions.Set<List<Carrito>>(HttpContext.Session, "carritoSesion", carrito);
+                    ViewData["Message"] = "Se eliminó el producto del carrito";
+                    _logger.LogInformation("Se eliminó un producto del carrito");
+                }
+                return RedirectToAction("Index");
             }
         }
 

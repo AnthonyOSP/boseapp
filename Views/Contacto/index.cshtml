@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Contacto";
 }
+}
 
 <div class="container" style="margin-top:2rem;">
     <h1 class="text-center mb-4">Formulario de Contacto</h1>
@@ -18,6 +19,10 @@
                     <label asp-for="FormContacto!.Email">Correo Electrónico</label>
                     <input asp-for="FormContacto!.Email" type="email" class="form-control" id="FormContacto_Email"
                         required />
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="FormContacto!.Asunto">Asunto</label>
+                    <input asp-for="FormContacto!.Asunto" class="form-control" id="FormContacto_Asunto" required />
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="FormContacto!.Message">Mensaje</label>
@@ -43,13 +48,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="messageModalLabel">Mensaje</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" data-dismiss="modal" class="btn-close" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @TempData["Message"]
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -63,30 +68,34 @@
                     <thead class="fw-bold table-dark">
                         <td>ID</td>
                         <td>Email</td>
+                        <td>Asunto</td>
                         <td>Message</td>
+                        <td>Categoría</td>
                         <td>Acción</td>
                     </thead>
-                    <tbody class="table-group-divider">
-                        @if (Model.ListContacto != null)
+                    @if (Model.ListContacto != null && Model.ListContacto.Any())
+                    {
+                        @foreach (var item in Model.ListContacto)
                         {
-                            foreach (var item in Model.ListContacto)
-                            {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Message)</td>
-                                    <td style="display: flex;">
-                                        <button type="button" class="btn btn-success btn-sm"
-                                            onclick="editarContacto(@item.Id, '@item.Nombre', '@item.Email', '@item.Message')">Editar</button>
-                                        <form asp-controller="Contacto" asp-action="EliminarPorId" method="post"
-                                            style="display:inline; margin-left: .5rem;">
-                                            <input type="hidden" name="id" value="@item.Id" />
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            }
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Asunto)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                                <td>
+                                    <form asp-controller="Contacto" asp-action="EliminarPorId" method="post">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
                         }
+                    }
+                    else
+                    {
+                        <p>No hay contactos disponibles.</p>
+                    }
                     </tbody>
                 </table>
             </div>
@@ -96,27 +105,7 @@
 </div>
 
 <script>
-    function editarContacto(id, nombre, email, message) {
-        document.getElementById('contactId').value = id;
-        document.getElementById('FormContacto_Nombre').value = nombre;
-        document.getElementById('FormContacto_Email').value = email;
-        document.getElementById('FormContacto_Message').value = message;
-        var submitButton = document.querySelector('#contactForm button[type="submit"]');
-        submitButton.textContent = 'Confirmar Edición';
-        submitButton.classList.remove('btn-dark');
-        submitButton.classList.add('btn-success');
-
-    }
-
-
     window.onload = function () {
-    @* var successMessage = document.getElementById('successMessage');
-
-            if (successMessage) {
-            setTimeout(function () {
-            successMessage.style.display = 'none';
-            }, 1500);
-            } *@
 
         var message = '@TempData["Message"]';
         if (message) {

@@ -1,0 +1,129 @@
+@model IEnumerable<boseapp.Models.Producto>
+@{
+    ViewData["Title"] = "Productos";
+    Layout = "_AdminLayout";
+}
+
+<div class="app-content-header">
+    <h1 class="app-content-headerText">Productos</h1>
+    <button class="app-content-headerButton" id="btnAgregarProducto">Agregar Producto</button>
+</div>
+<div class="app-content-actions">
+    <input class="search-bar" placeholder="Search..." type="text">
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-container" style="overflow-y: auto;">
+        <table class="table text-light">
+            <thead class="thead-fixed">
+                <tr class="table-primary">
+                    <th>Producto</th>
+                    <th class="w-25">Descripción</th>
+                    <th>Categoría</th>
+                    <th>SKU</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody class="text-light">
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@producto.ImagenURL" alt="@producto.Nombre" width="50" height="40" />
+                            <span>@producto.Nombre</span>
+                        </td>
+                        <td class="w-25">@producto.Descripcion</td>
+                        <td>@producto.Categoria?.Nombre</td>
+                        <td>@producto.SKU</td>
+                        <td>$ @producto.Precio</td>
+                        <td>@producto.Stock</td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="@Url.Action("EditarProducto", "AdminDashboard", new { id = producto.Id })"
+                                    class="btn btn-success btn-sm edit-button">
+                                    <img src="../img/edit.svg" width="20" height="20" alt="edit button">
+                                </a>
+                                <form asp-controller="AdminDashboard" asp-action="EliminarPorId" method="post"
+                                    style="display:inline;" class="delete-form">
+                                    <input type="hidden" name="id" value="@producto.Id" />
+                                    <button type="submit" class="btn btn-danger">
+                                        <img src="../img/delete.svg" width="20" height="20" alt="delete button">
+                                    </button>
+                                    @Html.AntiForgeryToken()
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No hay productos disponibles.</p>
+}
+
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro que desea eliminar este producto?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnAgregarProducto').on('click', function (e) {
+                e.preventDefault();
+                $.get('@Url.Action("CrearProducto", "AdminDashboard")', function (data) {
+                    $('#crearProductModalContainer').html(data);
+                    $('#crearProductModal').modal('show');
+                });
+            });
+
+            $('.edit-button').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.get(url, function (data) {
+                    $('#editProductModalContainer').html(data);
+                    $('#editProductModal').modal('show');
+                });
+            });
+
+            $('.delete-form').on('submit', function (e) {
+                e.preventDefault();
+                formToSubmit = $(this);
+                $('#deleteConfirmModal').modal('show');
+            });
+
+            $('#confirmDelete').on('click', function () {
+                if (formToSubmit) {
+                    formToSubmit[0].submit();
+                }
+                $('#deleteConfirmModal').modal('hide');
+            });
+        });
+    </script>
+}
+
+<div id="crearProductModalContainer"></div>
+<div id="editProductModalContainer"></div>

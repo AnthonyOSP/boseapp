@@ -5,10 +5,11 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        var user = await UserManager.GetUserAsync(User);
         <li class="nav-item" style="color:whitesmoke">
             <a class="nav-link nav-text-welcome text-light" asp-area="Identity" asp-page="/Account/Manage/Index"
                 title="Manage">Bienvenido
-                @User.Identity?.Name!</a>
+                @user?.Nombre !</a>
         </li>
 
         <li class="nav-item">
