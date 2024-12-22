@@ -18,6 +18,8 @@ namespace boseapp.Models
         public Producto? Producto { get; set; }
         public int Cantidad { get; set; }
         public Decimal Precio { get; set; }
+        public string? Categoria { get; set; } // Propiedad para la categoría
+        public string? ImagenURL { get; set; } // Propiedad para la URL de la imagen
         public string Status { get; set; } = "PENDIENTE";
 
         public Decimal CalcularTotal()
