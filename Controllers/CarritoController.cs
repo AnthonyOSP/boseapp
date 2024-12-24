@@ -48,10 +48,10 @@ namespace boseapp.Controllers
             ViewData["SubTotal"] = total;
 
             var deliveryOptions = new Dictionary<string, decimal>
-    {
-        { "Envío en Lima", 10.00m },
-        { "Envío a Provincia", 20.00m },
-    };
+            {
+                { "Envío en Lima", 10.00m },
+                { "Envío a Provincia", 20.00m },
+            };
             ViewData["DeliveryOptions"] = deliveryOptions;
             return View(carrito);
         }
@@ -135,6 +135,44 @@ namespace boseapp.Controllers
                 }
                 return RedirectToAction("Index");
             }
+        }
+
+        public IActionResult Increment(long? id)
+        {
+            var userName = _userManager.GetUserName(User);
+            if (userName == null)
+            {
+                return RedirectToAction("Index", "Catalogo");
+            }
+
+            List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
+            var item = carrito.FirstOrDefault(c => c.Producto.Id == id && c.UserName == userName);
+            if (item != null)
+            {
+                item.Cantidad++;
+                Helper.SessionExtensions.Set<List<Carrito>>(HttpContext.Session, "carritoSesion", carrito);
+                _logger.LogInformation($"Aumentó la cantidad del producto {item.Producto.Nombre} a {item.Cantidad}");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Decrement(long? id)
+        {
+            var userName = _userManager.GetUserName(User);
+            if (userName == null)
+            {
+                return RedirectToAction("Index", "Catalogo");
+            }
+
+            List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
+            var item = carrito.FirstOrDefault(c => c.Producto.Id == id && c.UserName == userName);
+            if (item != null && item.Cantidad > 1)
+            {
+                item.Cantidad--;
+                Helper.SessionExtensions.Set<List<Carrito>>(HttpContext.Session, "carritoSesion", carrito);
+                _logger.LogInformation($"Disminuyó la cantidad del producto {item.Producto.Nombre} a {item.Cantidad}");
+            }
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
